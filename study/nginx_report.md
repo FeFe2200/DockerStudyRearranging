@@ -62,4 +62,31 @@ Worker Process의 개수는 설정 파일에서 정의되며, 정의된 프로�
 
 
 ## nginx 내부 Server Block File설정 방법(포트연결, 사이트)
-https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-on-centos-7#step-three-%E2%80%94-create-new-server-block-files
+https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-on-centos-7#step-three-%E2%80%94-create-new-server-block-files<br/>
+
+## nginx openssl 설정 방법
+```C
+apt-get -y install vim openssl
+openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=FREE/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt
+mv localhost.dev.crt etc/ssl/certs/
+mv localhost.dev.key etc/ssl/private/
+chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
+
+/*
+파일 키파일이름과 인증서는 아래에서도 사용되므로 그대로 유지하거나, 바꾼다면 config를 바꿀 때 까먹지 말고 같이 바꿔주어야한다.
+-req : 인증서 요청 및 인증서 생성 유틸.
+-rsa : 4096 방식으로 localhost.dev.key으로 공개키 만듬.
+-newkey : 개인키를 생성하기 위한 옵션.
+-keyout <키 파일 이름> : 키 파일 이름을 지정.
+-out <인증서 이름> : 인증서 이름을 지정.
+-days 365 : 인증서의 유효기간을 작성하는 옵션.
+-nodes는 nginx를 킬떄 암호 입력하지 않고 ssl이 작동하도록 해줌.
+
+C == 나라;
+ST == 도시;
+L == 시/도;
+O == 기관명;
+OU == 회사/팀;
+CN == 도메인 이름;
+*/
+```
