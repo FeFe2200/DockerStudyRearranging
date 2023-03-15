@@ -1,6 +1,7 @@
 # DockerStudyRearranging
 도커를 학습해보자. 간단하게 nginx, wordpress, mariaDB를 사용하여 도커 익히기</br>
 기존 DockerStudy private repository의 public 재정리</br>
+스터디 기간 2022.09.19 ~ 2022.10.15</br>
 </br>
 
 ## 목차
