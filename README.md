@@ -27,7 +27,7 @@
 ### 실행시 참고사항
 1. 해당 프로젝트를 다운 받은 후 Makefile 실행.
 2. 로컬호스트에서 실행시 도메인명을 변경하려면 /etc/hosts(데비안OS  기준)에 로컬호스트에 추가로 도메인명 추가하기.
-![ex](./exDns.png)
+![ex](./.exDns.png)
 3. 도메인명 추가 시 /srcs/requirements/nginx/conf/nginx.conf파일에서 server_name값 동일하게 변경해 주기.
 4. 도메인명으로 브라우저에서 접속 후 나오는 워드프레스 초기설정 후 사용(단, /srcs/docker-compose.yml에서 volumes:의 device 주소(가상머신 OS)에 해당 파일 만들어 주기).
 5. 버전정보 docker -v : 18.09.1, docker-compose -v : 1.29.2
