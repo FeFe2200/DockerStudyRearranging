@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build: requirements/nginx/
+    image: nginx
+    depends_on:
+      - wordpress
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - app-network
+    volumes:
+      -  wp_volume:/var/www/html
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    image: wordpress
+    depends_on:
+      - mariadb
+    restart: always
+    networks:
+      - app-network
+    env_file:
+      - .env
+    volumes:
+      -  wp_volume:/var/www/html
+    expose:
+      - "9000"
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    image: mariadb
+    restart: always
+    networks:
+      - app-network
+    env_file:
+      - .env
+    volumes:
+      -  db_volume:/var/lib/mysql/
+    expose:
+      - "3306"
+
+networks:
+  app-network:
+
+volumes:
+    db_volume:
+      driver_opts:
+        type: volume
+        o : 'bind'
+        device: '/home/cheolee/data/db'
+
+    wp_volume:
+      driver_opts:
+        type: volume
+        o : 'bind'
+        device: '/home/cheolee/data/site'
